@@ -1,6 +1,6 @@
 # README
 
-skysc pulls and displays the flight arrival details from SCAA's site.
+skysc pulls the flight arrival details from SCAA's site.
 
 ## To Install and Run
 
