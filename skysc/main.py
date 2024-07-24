@@ -27,7 +27,7 @@ def main():
     soup = BeautifulSoup(html_doc, "html.parser")
     lines = soup.find_all("tr")
     tbl = []
-    day = 0
+    day = 6 # (eoea): The first day is Sunday (7) on the site; day=6 because it will increment to 7 on the first pass.
 
     for line in lines:
         tbl_row = {}
@@ -38,7 +38,7 @@ def main():
                 and html_txt[1].text.strip() == "From"
                 and html_txt[2].text.strip() == "Arrival Time"
             ):
-                day += 1
+                day = 1 if day + 1 > 7 else day + 1
                 continue
 
             tbl_row["Arrival_Day"] = day_of_week[day]
