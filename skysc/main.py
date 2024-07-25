@@ -4,13 +4,13 @@ from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
 
 day_of_week = {
-    1: "Monday",
-    2: "Tuesday",
-    3: "Wednesday",
-    4: "Thursday",
-    5: "Friday",
-    6: "Saturday",
-    7: "Sunday",
+    1: "Sunday",
+    2: "Monday",
+    3: "Tuesday",
+    4: "Wednesday",
+    5: "Thursday",
+    6: "Friday",
+    7: "Saturday",
 }
 
 
@@ -27,7 +27,7 @@ def main():
     soup = BeautifulSoup(html_doc, "html.parser")
     lines = soup.find_all("tr")
     tbl = []
-    day = 6 # (eoea): The first day is Sunday (7) on the site; day=6 because it will increment to 7 on the first pass.
+    day = 0 # (eoea): first day of the week is Sunday, this counter gets incremented on the first pass below.
 
     for line in lines:
         tbl_row = {}
@@ -38,7 +38,7 @@ def main():
                 and html_txt[1].text.strip() == "From"
                 and html_txt[2].text.strip() == "Arrival Time"
             ):
-                day = 1 if day + 1 > 7 else day + 1
+                day+=1
                 continue
 
             tbl_row["Arrival_Day"] = day_of_week[day]
